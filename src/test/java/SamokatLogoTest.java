@@ -3,39 +3,34 @@
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pageObjectPackage.HomePageYandexSamokat;
+import pageobject.HomePageYandexSamokat;
 
-public class samokatLogoTest {
+public class SamokatLogoTest {
     private WebDriver driver;
 
     @Test
-    public void samokatLogoTestChrome() {
+    public void SamokatLogoTestChrome() {
         driver = new ChromeDriver();
         HomePageYandexSamokat objHomePage = new HomePageYandexSamokat(driver);
 
-        driver.get(objHomePage.getHomePageURL());
+        driver.get(objHomePage.getHOME_PAGE_URL());
 
-        driver.findElement(By.xpath(".//img[@alt='Scooter']")).click();
-        String currentURL = driver.getCurrentUrl();
-        Assert.assertEquals(currentURL,objHomePage.getHomePageURL());
-
+        objHomePage.clickScooterLogo();
+        Assert.assertEquals(driver.getCurrentUrl(),objHomePage.getHOME_PAGE_URL());
     }
 
     @Test
-    public void samokatLogoTestFirefox() {
+    public void SamokatLogoTestFirefox() {
         driver = new FirefoxDriver();
         HomePageYandexSamokat objHomePage = new HomePageYandexSamokat(driver);
 
-        driver.get(objHomePage.getHomePageURL());
+        driver.get(objHomePage.getHOME_PAGE_URL());
 
-        driver.findElement(By.xpath(".//img[@alt='Scooter']")).click();
-        String currentURL = driver.getCurrentUrl();
-        Assert.assertEquals(currentURL,objHomePage.getHomePageURL());
-
+        objHomePage.clickScooterLogo();
+        Assert.assertEquals(driver.getCurrentUrl(),objHomePage.getHOME_PAGE_URL());
     }
 
     @After

@@ -3,22 +3,19 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pageObjectPackage.HomePageYandexSamokat;
+import pageobject.HomePageYandexSamokat;
 
 @RunWith(Parameterized.class)
-public class faqSectionTest {
+public class FaqSectionTest {
     private WebDriver driver;
 
     private final int faqIndex;
     private final String expectedAnswer;
 
-    public faqSectionTest(int faqIndex, String expectedAnswer) {
+    public FaqSectionTest(int faqIndex, String expectedAnswer) {
         this.faqIndex = faqIndex;
         this.expectedAnswer = expectedAnswer;
     }
@@ -39,44 +36,25 @@ public class faqSectionTest {
 
 
     @Test
-    public void faqSectionTestChrome() {
-        //я хотел сделать инициализацию драйвера через параметризацию, но не нашел как это сделать,
-        // а наставник сказал, что и не надо ее делать, так как такого явного требования не было
-
+    public void FaqSectionTestChrome() {
         driver = new ChromeDriver();
         HomePageYandexSamokat objHomePage = new HomePageYandexSamokat(driver);
 
-        driver.get(objHomePage.getHomePageURL());
+        driver.get(objHomePage.getHOME_PAGE_URL());
 
-        String exactArrowButton = String.format((objHomePage.getArrowButton()),faqIndex);
-        String exactTextArea = String.format((objHomePage.getTextArea()),faqIndex);
-
-        WebElement element = driver.findElement(By.xpath(exactArrowButton));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        element.click();
-
-        String answer = driver.findElement(By.xpath(exactTextArea)).getText();
-        Assert.assertTrue(answer != null);
-        Assert.assertEquals(answer, expectedAnswer);
+        objHomePage.findAndClickArrowButton(faqIndex);
+        Assert.assertEquals(objHomePage.getFaqText(faqIndex), expectedAnswer);
     }
 
     @Test
-    public void faqSectionTestFirefox() {
+    public void FaqSectionTestFirefox() {
         driver = new FirefoxDriver();
         HomePageYandexSamokat objHomePage = new HomePageYandexSamokat(driver);
 
-        driver.get(objHomePage.getHomePageURL());
+        driver.get(objHomePage.getHOME_PAGE_URL());
 
-        String exactArrowButton = String.format((objHomePage.getArrowButton()),faqIndex);
-        String exactTextArea = String.format((objHomePage.getTextArea()),faqIndex);
-
-        WebElement element = driver.findElement(By.xpath(exactArrowButton));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        element.click();
-
-        String answer = driver.findElement(By.xpath(exactTextArea)).getText();
-        Assert.assertTrue(answer != null);
-        Assert.assertEquals(answer, expectedAnswer);
+        objHomePage.findAndClickArrowButton(faqIndex);
+        Assert.assertEquals(objHomePage.getFaqText(faqIndex), expectedAnswer);
     }
 
     @After
