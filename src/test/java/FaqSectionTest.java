@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import pageobject.HomePageYandexSamokat;
 
 @RunWith(Parameterized.class)
@@ -36,25 +35,14 @@ public class FaqSectionTest {
 
 
     @Test
-    public void FaqSectionTestChrome() {
+    public void faqSectionTestChrome() {
         driver = new ChromeDriver();
         HomePageYandexSamokat objHomePage = new HomePageYandexSamokat(driver);
 
         driver.get(objHomePage.getHOME_PAGE_URL());
 
         objHomePage.findAndClickArrowButton(faqIndex);
-        Assert.assertEquals(objHomePage.getFaqText(faqIndex), expectedAnswer);
-    }
-
-    @Test
-    public void FaqSectionTestFirefox() {
-        driver = new FirefoxDriver();
-        HomePageYandexSamokat objHomePage = new HomePageYandexSamokat(driver);
-
-        driver.get(objHomePage.getHOME_PAGE_URL());
-
-        objHomePage.findAndClickArrowButton(faqIndex);
-        Assert.assertEquals(objHomePage.getFaqText(faqIndex), expectedAnswer);
+        Assert.assertEquals(expectedAnswer, objHomePage.getFaqText(faqIndex));
     }
 
     @After

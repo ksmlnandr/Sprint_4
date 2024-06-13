@@ -21,10 +21,10 @@ public class HomePageYandexSamokat {
     private String orderButtonLink = ".//div[contains(@class,'%s')]/button[text()='Заказать']";
 
     //кнопка заказа в шапке страницы
-    private String orderButtonHeader = "Header_Nav";
+    private static String orderButtonHeader = "Header_Nav";
 
     //кнопка заказа в теле страницы
-    private String orderButtonBody = "Home_FinishButton__1_cWm";
+    private static String orderButtonBody = "Home_FinishButton__1_cWm";
 
     //локатор поля Имя
     private By nameField = By.xpath(".//*[contains(@placeholder,'Имя')]");
@@ -84,8 +84,8 @@ public class HomePageYandexSamokat {
     public String getHOME_PAGE_URL() {
         return HOME_PAGE_URL;
     }
-    public String getOrderButtonHeader() {return orderButtonHeader; }
-    public String getOrderButtonBody() {return orderButtonBody; }
+    public static String getOrderButtonHeader() {return orderButtonHeader; }
+    public static String getOrderButtonBody() {return orderButtonBody; }
 
 
     //конструктор класса

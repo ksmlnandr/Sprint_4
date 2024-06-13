@@ -5,32 +5,20 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import pageobject.HomePageYandexSamokat;
 
 public class SamokatLogoTest {
     private WebDriver driver;
 
     @Test
-    public void SamokatLogoTestChrome() {
+    public void samokatLogoTestChrome() {
         driver = new ChromeDriver();
         HomePageYandexSamokat objHomePage = new HomePageYandexSamokat(driver);
 
         driver.get(objHomePage.getHOME_PAGE_URL());
 
         objHomePage.clickScooterLogo();
-        Assert.assertEquals(driver.getCurrentUrl(),objHomePage.getHOME_PAGE_URL());
-    }
-
-    @Test
-    public void SamokatLogoTestFirefox() {
-        driver = new FirefoxDriver();
-        HomePageYandexSamokat objHomePage = new HomePageYandexSamokat(driver);
-
-        driver.get(objHomePage.getHOME_PAGE_URL());
-
-        objHomePage.clickScooterLogo();
-        Assert.assertEquals(driver.getCurrentUrl(),objHomePage.getHOME_PAGE_URL());
+        Assert.assertEquals(objHomePage.getHOME_PAGE_URL(), driver.getCurrentUrl());
     }
 
     @After

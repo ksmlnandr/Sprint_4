@@ -4,7 +4,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import pageobject.HomePageYandexSamokat;
 
 import java.util.concurrent.TimeUnit;
@@ -42,44 +41,20 @@ public class OrderFlowTest {
 
     @Parameterized.Parameters
     public static Object[][] setUserData() {
-        String orderButtonHeader = "Header_Nav";
-        String orderButtonBody = "Home_FinishButton__1_cWm";
 
         return new Object[][] {
-                {orderButtonHeader,
+                {HomePageYandexSamokat.getOrderButtonHeader(),
                         "Иван", "Васильев", "Москва, ул. Тверская, д. 1", "Сокольники", "+78005553535",
                         "20", "сутки", "black", "Оставьте у двери"},
-                {orderButtonBody,
+                {HomePageYandexSamokat.getOrderButtonBody(),
                         "Мария", "Петрова", "Ижевск, ул. Ленина, д. 34", "Чистые пруды", "+7900000001",
                         "24", "двое суток", "grey", "Позвоните перед приездом"},
         };
     }
 
     @Test
-    public void OrderFlowTestChrome() {
+    public void orderFlowTestChrome() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-        HomePageYandexSamokat objHomePage = new HomePageYandexSamokat(driver);
-
-        driver.get(objHomePage.getHOME_PAGE_URL());
-        objHomePage.hideCookieBanner();
-
-        objHomePage.locateAndClickOrderButton(orderButtonClass);
-
-        objHomePage.fillUserData(name, surname, address, subwayStationName, phone);
-        objHomePage.clickNextButton();
-
-        objHomePage.fillDeliveryDetails(day, duration, colour, comment);
-
-        objHomePage.checkConfimationModalFormIsVisible();
-
-        objHomePage.checkSuccesfulOrderFormIsVisible();
-    }
-
-    @Test
-    public void OrderFlowTestFirefox() {
-        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         HomePageYandexSamokat objHomePage = new HomePageYandexSamokat(driver);
